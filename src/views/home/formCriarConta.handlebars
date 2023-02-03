@@ -1,0 +1,120 @@
+
+<div class="d-flex flex-column rounded criarConta-container">
+
+    <div class="container-fluid d-flex flex-column rounded-top text-center login-div-titulo">
+        <span>Criação de conta</span>
+    </div>
+
+    <form action="/criar-conta" method="post" id="formCriarConta" autocomplete="off"
+    class="container-fluid px-0 d-flex flex-column rounded">
+
+        {{!-- Nome e estado --}}
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8 px-2 mt-2">
+                    <label for="nome"><b>Nome</b></label>
+                    <input type="text" name="nome" id="input-nome" class="rounded px-2 py-1 criarConta-input" autofocus autocomplete="off">
+                    <span class="erro-validacao">Nome inválido.</span>
+                </div>
+                <div class="col-md-4 px-2 mt-2">
+                    <label for="estado"><b>Estado</b></label>
+                    <select name="estado" id="select-estado" class="rounded px-2 py-1 criarConta-input">
+                        <option value="AC">Acre</option>
+                        <option value="AL">Alagoas</option>
+                        <option value="AP">Amapá</option>
+                        <option value="AM">Amazonas</option>
+                        <option value="BA">Bahia</option>
+                        <option value="CE">Ceará</option>
+                        <option value="DF">Distrito Federal</option>
+                        <option value="ES">Espírito Santo</option>
+                        <option value="GO">Goiás</option>
+                        <option value="MA">Maranhão</option>
+                        <option value="MT">Mato Grosso</option>
+                        <option value="MS">Mato Grosso do Sul</option>
+                        <option value="MG">Minas Gerais</option>
+                        <option value="PA">Pará</option>
+                        <option value="PB">Paraíba</option>
+                        <option value="PR">Paraná</option>
+                        <option value="PE">Pernambuco</option>
+                        <option value="PI">Piauí</option>
+                        <option value="RJ">Rio de Janeiro</option>
+                        <option value="RN">Rio Grande do Norte</option>
+                        <option value="RS">Rio Grande do Sul</option>
+                        <option value="RO">Rondônia</option>
+                        <option value="RR">Roraima</option>
+                        <option value="SC">Santa Catarina</option>
+                        <option value="SP">São Paulo</option>
+                        <option value="SE">Sergipe</option>
+                        <option value="TO">Tocantins</option>
+                        <option value="EX">Estrangeiro</option>
+                    </select>
+                    <span class="erro-validacao">Estado inválido.</span>
+                </div>
+            </div>
+        </div>
+
+        {{!-- E-mail e telefone --}}
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8 px-2 mt-2">
+                    <label for="email"><b>E-mail</b></label>
+                    <input type="email" name="email" id="input-email" class="rounded px-2 py-1 criarConta-input" autofocus autocomplete="off">
+                    <span class="erro-validacao">E-mail inválido.</span>
+                </div>
+                <div class="col-md-4 px-2 mt-2">
+                    <label for="tlefone"><b>Telefone</b></label>
+                    <input type="text" name="telefone" id="input-telefone" class="rounded px-2 py-1 criarConta-input" autofocus autocomplete="off">
+                    <span class="erro-validacao">Telefone inválido.</span>
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="container-fluid mb-3">
+            <div class="row">
+                <div class="col-md-6 px-2 mt-2">
+                    {{!-- <button type="button" class="py-1 rounded criarConta-botao" onclick='location.href="/"'>Cancelar</button> --}}
+                    <input type="button" class="py-1 rounded criarConta-botao" onclick='location.href="/"' value="Cancelar">
+                </div>
+                <div class="col-md-6 px-2 mt-2">
+                    <input type="submit" class="py-1 rounded criarConta-botao" value="Criar conta">
+                </div>
+            </div>    
+        </div>
+        
+    </form>
+
+</div>
+
+
+{{!-- 
+<div class="d-flex flex-column">
+
+    <div class="d-flex flex-column text-center login-div-titulo">
+        <span>Login</span>
+    </div>
+
+    <form method="POST" action="/login" id="formLogin" autocomplete="off" class="login-form">
+
+        <div class="login-div-campo">
+            <label for="email"><b>Nome do usuário</b></label>
+            <input type="email" name="email" id="input-email" class="login-input" autofocus autocomplete="off">
+        </div>
+
+        <div class="login-div-campo">
+            <label for="senha"><b>Senha</b></label>
+            <input type="text" name="senha" id="input-senha" class="login-input" autocomplete="off">
+        </div>
+        
+        <div class="login-div-botoes">
+            <input type="submit" id="input-submit" class="login-botao" value="Entrar" >
+        </div>
+        
+        <div class="login-div-links">
+            <a href="">Esqueceu sua senha?</a>
+            <a href="/criar-conta">Criar conta</a>
+        </div>
+    
+    </form>
+
+</div> --}}

@@ -1,0 +1,63 @@
+
+<div class="d-flex flex-column rounded login-container">
+
+    <div class="container-fluid d-flex flex-column rounded-top text-center login-div-titulo">
+        <span>Recuperação de senha</span>
+    </div>
+
+    <form action="/recuperar-senha" method="post" id="formRecuperarSenha" autocomplete="off"
+    class="container-fluid px-0 d-flex flex-column rounded">
+
+        <div class="d-flex flex-column px-2 mt-2">
+            <label for="email"><b>Email</b></label>
+            <input type="email" name="email" id="input-email" class="rounded px-2 py-1 login-input" autofocus autocomplete="off">
+        </div>
+
+        <div class="d-flex flex-column align-items-center mt-2">
+            <span style="color: red">E-mail não cadastrado.</span>
+        </div>
+
+        <div class="d-flex flex-column px-2 mt-2">
+            <input type="submit" id="input-submit" class="py-1 rounded login-botao" value="Receber por e-mail" >
+        </div>
+        
+        <div class="d-flex flex-row justify-content-start px-2 mt-3 mb-3">
+            <a href="/">Voltar</a>
+        </div>
+
+    </form>
+
+</div>
+
+
+{{!-- 
+<div class="d-flex flex-column">
+
+    <div class="d-flex flex-column text-center login-div-titulo">
+        <span>Login</span>
+    </div>
+
+    <form method="POST" action="/login" id="formLogin" autocomplete="off" class="login-form">
+
+        <div class="login-div-campo">
+            <label for="email"><b>Nome do usuário</b></label>
+            <input type="email" name="email" id="input-email" class="login-input" autofocus autocomplete="off">
+        </div>
+
+        <div class="login-div-campo">
+            <label for="senha"><b>Senha</b></label>
+            <input type="text" name="senha" id="input-senha" class="login-input" autocomplete="off">
+        </div>
+        
+        <div class="login-div-botoes">
+            <input type="submit" id="input-submit" class="login-botao" value="Entrar" >
+        </div>
+        
+        <div class="login-div-links">
+            <a href="">Esqueceu sua senha?</a>
+            <a href="/criar-conta">Criar conta</a>
+        </div>
+    
+    </form>
+
+</div> --}}

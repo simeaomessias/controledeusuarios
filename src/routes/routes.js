@@ -3,16 +3,19 @@ import express from 'express'
 const router = express.Router();
 
 // Controllers
-import loginController from "../controllers/loginController.js"
+import homeController from "../controllers/homeController.js"
 
-// Home
-router.get('/', (req, res) => {
-    res.redirect('/login')
-})
+// Home - Login
+router.get('/', homeController.formLogin)
+router.post('/', homeController.verificaLogin)
 
-// Login
-router.get('/login', loginController.index)
-router.post('/login', loginController.verifyLogin)
+// Home - Recuperação de senha
+router.get('/recuperar-senha', homeController.formRecuperarSenha)
+router.post('/recuperar-senha', homeController.recuperaSenha)
+
+// Home - Criar nova conta
+router.get('/criar-conta', homeController.formCriarConta)
+router.post('/criar-conta', homeController.criaConta)
 
 
 export default router
