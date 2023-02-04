@@ -13,8 +13,8 @@
             <div class="row">
                 <div class="col-md-8 px-2 mt-2">
                     <label for="nome"><b>Nome</b></label>
-                    <input type="text" name="nome" id="input-nome" class="rounded px-2 py-1 criarConta-input" autofocus autocomplete="off">
-                    <span class="erro-validacao">Nome inválido.</span>
+                    <input type="text" name="nome" id="input-nome" class="rounded px-2 py-1 criarConta-input" autofocus autocomplete="off" value="{{usuario.nome}}">
+                    <span class="erro-validacao">{{erros.nome}}</span>
                 </div>
                 <div class="col-md-4 px-2 mt-2">
                     <label for="estado"><b>Estado</b></label>
@@ -43,12 +43,16 @@
                         <option value="RO">Rondônia</option>
                         <option value="RR">Roraima</option>
                         <option value="SC">Santa Catarina</option>
-                        <option value="SP">São Paulo</option>
+                        <option value="SP" selected>São Paulo</option>
                         <option value="SE">Sergipe</option>
                         <option value="TO">Tocantins</option>
                         <option value="EX">Estrangeiro</option>
                     </select>
-                    <span class="erro-validacao">Estado inválido.</span>
+                    <span class="erro-validacao">{{erros.estado}}</span>
+                    {{!-- Script para fazer a marcação de acordo o que vem do back-end --}}
+                    <script>
+                        document.getElementById('select-estado').value = "{{usuario.estado}}"
+                    </script>
                 </div>
             </div>
         </div>
@@ -58,22 +62,21 @@
             <div class="row">
                 <div class="col-md-8 px-2 mt-2">
                     <label for="email"><b>E-mail</b></label>
-                    <input type="email" name="email" id="input-email" class="rounded px-2 py-1 criarConta-input" autofocus autocomplete="off">
-                    <span class="erro-validacao">E-mail inválido.</span>
+                    <input type="email" name="email" id="input-email" class="rounded px-2 py-1 criarConta-input" autofocus autocomplete="off" value="{{usuario.email}}">
+                    <span class="erro-validacao">{{erros.email}}</span>
                 </div>
                 <div class="col-md-4 px-2 mt-2">
-                    <label for="tlefone"><b>Telefone</b></label>
-                    <input type="text" name="telefone" id="input-telefone" class="rounded px-2 py-1 criarConta-input" autofocus autocomplete="off">
-                    <span class="erro-validacao">Telefone inválido.</span>
+                    <label for="telefone"><b>Telefone</b></label>
+                    <input type="text" name="telefone" id="input-telefone" class="rounded px-2 py-1 criarConta-input" autofocus autocomplete="off" value="{{usuario.telefone}}">
+                    <span class="erro-validacao">{{erros.telefone}}</span>
                 </div>
             </div>
         </div>
         
-
-        <div class="container-fluid mb-3">
-            <div class="row">
+        {{!-- Botões --}}
+        <div class="container-fluid mt-2 mb-3">
+            <div class="row"> 
                 <div class="col-md-6 px-2 mt-2">
-                    {{!-- <button type="button" class="py-1 rounded criarConta-botao" onclick='location.href="/"'>Cancelar</button> --}}
                     <input type="button" class="py-1 rounded criarConta-botao" onclick='location.href="/"' value="Cancelar">
                 </div>
                 <div class="col-md-6 px-2 mt-2">
@@ -85,36 +88,3 @@
     </form>
 
 </div>
-
-
-{{!-- 
-<div class="d-flex flex-column">
-
-    <div class="d-flex flex-column text-center login-div-titulo">
-        <span>Login</span>
-    </div>
-
-    <form method="POST" action="/login" id="formLogin" autocomplete="off" class="login-form">
-
-        <div class="login-div-campo">
-            <label for="email"><b>Nome do usuário</b></label>
-            <input type="email" name="email" id="input-email" class="login-input" autofocus autocomplete="off">
-        </div>
-
-        <div class="login-div-campo">
-            <label for="senha"><b>Senha</b></label>
-            <input type="text" name="senha" id="input-senha" class="login-input" autocomplete="off">
-        </div>
-        
-        <div class="login-div-botoes">
-            <input type="submit" id="input-submit" class="login-botao" value="Entrar" >
-        </div>
-        
-        <div class="login-div-links">
-            <a href="">Esqueceu sua senha?</a>
-            <a href="/criar-conta">Criar conta</a>
-        </div>
-    
-    </form>
-
-</div> --}}

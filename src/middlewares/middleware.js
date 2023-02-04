@@ -1,7 +1,8 @@
-const global = (req, res, next)=>{
+const global = (req, res, next) => {
+
     // Variáveis para mensagens rápidas
-    res.locals.msgSuccess = req.flash("msgSuccess")
-    res.locals.msgError = req.flash("msgError")
+    res.locals.msgSucesso = req.flash("msgSucesso")
+    res.locals.msgErro = req.flash("msgErro")
 
     next()
 }

@@ -33,8 +33,14 @@
 .login-container {
     border: 1px solid black;
     width: 50%;
-    min-width: 300px;
-    max-width: 400px;
+    min-width: 350px;
+    max-width: 450px;
+}
+
+.login-msgFlash {
+    width: 50%;
+    min-width: 350px;
+    max-width: 450px;
 }
 
 .login-div-titulo {
@@ -91,7 +97,11 @@
 }
 
 @media (max-width: 767px) {
+    .login-container, .login-msgFlash {
+        width: 75%;
+    }
     .criarConta-container {
         width: 75%;
+        max-width: 400px;
     }
 }

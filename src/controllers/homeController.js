@@ -1,3 +1,8 @@
+// Importações
+
+import UsuarioModel from "../models/USuarioModel.js"
+const Usuario = UsuarioModel.Usuario;
+
 
 // Login
 
@@ -21,13 +26,46 @@ const recuperaSenha = (req, res) => {
     return;
 }
 
+// Criação de conta
+
 const formCriarConta = (req, res) => {
+
     res.render('home/formCriarConta', {layout: 'mainHome'})
     return;
 }
-const criaConta = (req, res) => {
-    res.send("VERIFICAÇÃO PARA CRIAÇÃO DE CONTA")
-    return;
+const criaConta = async (req, res) => {
+
+    try {
+        
+        const usuario = new Usuario(req.body)
+        await usuario.registrar()
+    
+        if (!usuario.valido) {
+            req.session.save( () => {
+                return res.render('home/formCriarConta', {
+                    layout: 'mainHome',
+                    usuario: usuario.dados,
+                    erros: usuario.erros
+                })
+            })
+            return
+        }
+    
+        req.flash('msgSucesso', "Usuário cadastrado com sucesso!")
+        req.session.save( () => {
+            return res.redirect('/')
+        })
+        return
+
+    } catch(e) {
+
+        req.flash('msgErro', "Erro ao cadastrar o usuário")
+        req.session.save( () => {
+            return res.redirect('/')
+        })
+        return
+
+    }
 }
 
 export default {
