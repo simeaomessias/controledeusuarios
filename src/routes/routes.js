@@ -9,16 +9,16 @@ import homeController from "../controllers/homeController.js"
 router.get('/', homeController.formLogin)
 router.post('/', homeController.verificaLogin)
 
-// Home - Recuperação de senha
-router.get('/recuperar-senha', homeController.formRecuperarSenha)
-router.post('/recuperar-senha', homeController.recuperaSenha)
-
-// Home - Criar nova conta
+// Home - Criar nova conta + Envio de senha inicial
 router.get('/criar-conta', homeController.formCriarConta)
 router.post('/criar-conta', homeController.criaConta)
-
-// Home - Enviar senha
 router.get('/enviar-senha-inicial/:id?', homeController.msgEmailSenhaInicial)
 router.post('/enviar-senha-inicial', homeController.enviaSenhaInicial)
+
+// Home - Recuperar de senha
+router.get('/recuperar-senha', homeController.formRecuperarSenha)
+router.post('/recuperar-senha', homeController.recuperaSenha)
+router.get('/enviar-senha-recuperada/:id?', homeController.msgEmailSenhaRecuperada)
+router.post('/enviar-senha-recuperada/:id?', homeController.enviaSenhaRecuperada)
 
 export default router

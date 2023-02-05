@@ -3,7 +3,6 @@
 import UsuarioModel from "../models/USuarioModel.js"
 const Usuario = UsuarioModel.Usuario;
 
-
 // Login
 
 const formLogin = (req, res) => {
@@ -15,18 +14,7 @@ const verificaLogin = (req, res) => {
     return;
 }
 
-// Recuperação de senha
-
-const formRecuperarSenha = (req, res) => {
-    res.render('home/formRecuperarSenha', {layout: 'mainHome'});
-    return;
-}
-const recuperaSenha = (req, res) => {
-    res.send("VERIFICAÇÃO PARA RECUPERAÇÃO DE SENHA.")
-    return;
-}
-
-// Criação de conta
+// Criar nova conta + Envio de senha inicial
 
 const formCriarConta = (req, res) => {
 
@@ -67,7 +55,6 @@ const criaConta = async (req, res) => {
 
     }
 }
-
 const msgEmailSenhaInicial = (req, res) => {
 
     res.render('home/msgEnviandoSenhaInicial', {
@@ -77,7 +64,6 @@ const msgEmailSenhaInicial = (req, res) => {
     return;
 
 }
-
 const enviaSenhaInicial = async (req, res) => {
 
     try {
@@ -120,18 +106,111 @@ const enviaSenhaInicial = async (req, res) => {
         return
 
     }
-
-
-
 }
 
+// Home - Recuperar de senha
+const formRecuperarSenha = (req, res) => {
+    res.render('home/formRecuperarSenha', {layout: 'mainHome'});
+    return;
+}
+const recuperaSenha = async (req, res) => {
+
+    try {
+        const usuario = new Usuario()
+        await usuario.acharPorEmail(req.body.email)
+
+        if (!usuario.valido) {
+            req.session.save( () => {
+                return res.render('home/formRecuperarSenha', {
+                    layout: 'mainHome',
+                    email: req.body.email,
+                    erros: usuario.erros
+                })
+            })
+            return
+        }
+
+        req.session.save( () => {
+            return res.redirect(`/enviar-senha-recuperada/${usuario.usuario._id.toString()}`)
+        })
+        return
+
+
+    } catch(e) {
+
+        req.flash('msgErro', `Erro ao recuperar a senha. Tente novamente.`)
+        req.session.save( () => {
+            return res.redirect('/recuperar-senha')
+        })
+        return
+    }
+}
+const msgEmailSenhaRecuperada = (req, res) => {
+
+    res.render('home/msgEnviandoSenhaRecuperada', {
+        layout: 'mainHome',
+        id: req.params.id
+    })
+    return;
+
+}
+const enviaSenhaRecuperada = async (req, res) => {
+
+    try {
+        const usuario = new Usuario()
+        await usuario.acharPorId(req.body.id)
+    
+        if (usuario.usuario === null) {
+            req.flash('msgErro', "Erro ao enviar senha. E-mail não cadastrado.")
+            req.session.save( () => {
+                res.redirect('/recuperar-senha')
+            })
+            return
+        }
+
+        await usuario.enviarSenha('senhaRecuperada')
+
+        if (!usuario.valido) {
+            req.flash('msgErro', `Erro ao enviar a senha por e-mail. Tente novamente.`)
+            req.session.save( () => {
+                res.redirect('/recuperar-senha')
+            })
+            return
+        }
+
+        req.flash('msgSucesso',
+         `Senha enviada! Remetente: sm-remetente@outlook.com". Verifique a pasta de Spam.`
+         )
+        req.session.save( () => {
+            return res.redirect('/')
+        })
+        return
+
+    } catch(e) {
+
+        req.flash('msgErro', `Erro ao enviar a senha por e-mail. Tente novamente.`)
+        req.session.save( () => {
+            return res.redirect('/recuperar-senha')
+        })
+        return
+    }
+}
+
+
+
 export default {
+
     formLogin,
     verificaLogin,
-    formRecuperarSenha,
-    recuperaSenha,
+
     formCriarConta,
     criaConta,
     msgEmailSenhaInicial,
-    enviaSenhaInicial
+    enviaSenhaInicial,
+
+    formRecuperarSenha,
+    recuperaSenha,
+    msgEmailSenhaRecuperada,
+    enviaSenhaRecuperada
+
 }

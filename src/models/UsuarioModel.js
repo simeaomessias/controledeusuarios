@@ -113,15 +113,26 @@ class Usuario {
 
     async enviarSenha(tipo) {
 
-        var assunto = ""
-        var texto = ""
-        var html = ""
-
-        if (tipo === "senhaInicial") {
-            assunto = "SENHA DE ACESSO (Projeto Controle de Usuário)";
-            texto = ""
-            html = `<h2>Olá, ${this.usuario.nome}.</h2> <h2>Conta criada com sucesso.</h2> <h2>Senha de acesso:</h2> <h1 style="color: blue">${this.usuario.senha}</h1>`
+        // Textos para o e-mail a ser enviado em função do tipo de envio
+        const opcoes = {
+            
+            senhaInicial: {
+                assunto: `SENHA DE ACESSO (Projeto Controle de Usuário)`,
+                texto: ``,
+                html: `<h2>Olá, ${this.usuario.nome}.</h2> <h2>Conta criada com sucesso.</h2> <h2>Senha de acesso:</h2> <h1 style="color: blue">${this.usuario.senha}</h1>`
+            },
+            
+            senhaRecuperada: {
+                assunto: `RECUPERAÇÃO DE SENHA (Projeto Controle de Usuário)`,
+                texto: ``,
+                html: `<h2>Olá, ${this.usuario.nome}.</h2> <h2>Recuperação de senha.</h2> <h2>Senha de acesso:</h2> <h1 style="color: blue">${this.usuario.senha}</h1>`
+            }
         }
+
+        // Seleção do texto em função tipo passado como parâmetro
+        var assunto = opcoes[tipo].assunto
+        var texto = opcoes[tipo].texto
+        var html = opcoes[tipo].html
 
         // Transportador
         let transporter = nodemailer.createTransport({
@@ -158,6 +169,14 @@ class Usuario {
     async acharPorId(id) {
         this.usuario = await UsuarioModelo.findOne({_id: id})
         return
+    }
+
+    async acharPorEmail(email) {
+        this.usuario = await UsuarioModelo.findOne({email: email}).lean()
+        if (!this.usuario) {
+            this.erros.email = "Email não encontrado."
+            this.valido = false
+        }
     }
 
     async registrar() {

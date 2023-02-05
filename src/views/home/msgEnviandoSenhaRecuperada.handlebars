@@ -1,0 +1,29 @@
+<div class="d-flex flex-column rounded telaEspera-container">
+
+    <div class="container-fluid d-flex flex-column rounded-top text-center login-div-titulo">
+        <span>Recuperação de senha</span>
+    </div>
+
+    <div class="container-fluid mt-2 mb-2">
+        <h4 class="text-center" style="color: blue">Conta encontrada!</h4>
+        <h5 class="text-center mt-2">Enviando senha por e-mail...</h5>
+        <h5 class="text-center mt-2 mb-2">Você será redirecionado!</h5>
+    </div>
+
+    <form action="/enviar-senha-recuperada" method="post">
+        <input type="hidden" name="id" value="{{id}}" style="display: none">
+        <input type="submit" value="" id="btnEnviarEmail" style="display: none">
+    </form>
+
+</div>
+
+<script>
+
+    const btnEnviarEmail = document.getElementById('btnEnviarEmail')
+    window.addEventListener('load', () => {
+        setInterval( () => {
+            btnEnviarEmail.click()
+        }, 1000)
+    })
+
+</script>
