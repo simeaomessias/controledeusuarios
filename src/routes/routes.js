@@ -17,5 +17,8 @@ router.post('/recuperar-senha', homeController.recuperaSenha)
 router.get('/criar-conta', homeController.formCriarConta)
 router.post('/criar-conta', homeController.criaConta)
 
+// Home - Enviar senha
+router.get('/enviar-senha-inicial/:id?', homeController.msgEmailSenhaInicial)
+router.post('/enviar-senha-inicial', homeController.enviaSenhaInicial)
 
 export default router

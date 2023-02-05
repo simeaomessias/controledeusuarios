@@ -1,4 +1,3 @@
-
 <div class="d-flex flex-column rounded criarConta-container">
 
     <div class="container-fluid d-flex flex-column rounded-top text-center login-div-titulo">
@@ -76,12 +75,7 @@
         {{!-- Mensagens de erro durante a geração de senha ou envio da mesma por e-mail --}}
         {{#if erros.senha}}
             <div class="container-fluid">
-                <p class="erro-validacao">{{erros.senha}}</p>
-            </div>
-        {{/if}}
-        {{#if erros.emailEnviado}}
-            <div class="container-fluid">
-                <p class="erro-validacao">{{erros.emailEnviado}}</p>
+                <p class="text-center erro-validacao">{{erros.senha}}</p>
             </div>
         {{/if}}
         
@@ -98,5 +92,4 @@
         </div>
         
     </form>
-
 </div>

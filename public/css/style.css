@@ -69,7 +69,7 @@
 .criarConta-botao:hover, .criarConta-botao:focus {
     background-color: var(--khaki-green);
 }
-.criarConta-container {
+.criarConta-container, .telaEspera-container {
     border: 1px solid black;
     width: 100%;
     min-width: 350px;
@@ -100,7 +100,7 @@
     .login-container, .login-msgFlash {
         width: 75%;
     }
-    .criarConta-container {
+    .criarConta-container, .telaEspera-container {
         width: 75%;
         max-width: 400px;
     }

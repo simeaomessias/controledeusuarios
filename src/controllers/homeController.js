@@ -52,26 +52,8 @@ const criaConta = async (req, res) => {
             return
         }
 
-        // Se não ocorreu erro, a partir desse ponto o usuário já foi salvo no BD
-
-        if (usuario.usuario !== null) { // Verificação por precaução
-
-            usuario.enviarSenha("senhaInicial")
-
-            if (!usuario.valido) {
-                
-                req.flash('msgSucesso', "Usuário cadastrado com sucesso!")
-                req.flash('msgErro', "Problema ao enviar a senha por e-mail. Use o link recuperar senha, por favor.")
-                req.session.save( () => {
-                    return res.redirect('/')
-                })
-                return
-            }
-        }
-
-        req.flash('msgSucesso', "Usuário cadastrado com sucesso!")
         req.session.save( () => {
-            return res.redirect('/')
+            return res.redirect(`/enviar-senha-inicial/${usuario.usuario._id.toString()}`)
         })
         return
 
@@ -86,6 +68,63 @@ const criaConta = async (req, res) => {
     }
 }
 
+const msgEmailSenhaInicial = (req, res) => {
+
+    res.render('home/msgEnviandoSenhaInicial', {
+        layout: 'mainHome',
+        id: req.params.id
+    })
+    return;
+
+}
+
+const enviaSenhaInicial = async (req, res) => {
+
+    try {
+        const usuario = new Usuario()
+        await usuario.acharPorId(req.body.id)
+    
+        if (usuario.usuario === null) {
+            req.flash('msgErro', "Erro ao enviar senha. Usuário não cadastrado.")
+            req.session.save( () => {
+                res.redirect('/')
+            })
+            return
+        }
+
+        await usuario.enviarSenha('senhaInicial')
+
+        if (!usuario.valido) {
+            req.flash('msgErro', `Erro ao enviar a senha por e-mail. Tente a opção "Recuperar senha"`)
+            req.session.save( () => {
+                res.redirect('/')
+            })
+            return
+        }
+
+        req.flash('msgSucesso',
+         `Senha enviada! Remetente: sm-remetente@outlook.com". Verifique a pasta de Spam.`
+         )
+        req.session.save( () => {
+            return res.redirect('/')
+        })
+        return
+
+    } catch(e) {
+
+        console.log(`CATCH de enviaSenhaInicial: ${e}`)
+        req.flash('msgErro', `Erro ao enviar a senha por e-mail. Tente a opção "Recuperar senha"`)
+        req.session.save( () => {
+            return res.redirect('/')
+        })
+        return
+
+    }
+
+
+
+}
+
 export default {
     formLogin,
     verificaLogin,
@@ -93,4 +132,6 @@ export default {
     recuperaSenha,
     formCriarConta,
     criaConta,
+    msgEmailSenhaInicial,
+    enviaSenhaInicial
 }

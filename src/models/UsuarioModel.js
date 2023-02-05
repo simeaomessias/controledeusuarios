@@ -9,7 +9,9 @@ const UsuarioEsquema = new mongoose.Schema({
     nome: {type: String, required: true},
     estado: {type: String, required: true},
     email: {type: String, required: true},
+    emailVisivel: {type: Boolean, required: true, default: true},
     telefone: {type: String, required: true},
+    telefoneVisivel: {type: Boolean, required: true, default: true},
     status: {type: String, required: true, default: 'ativo'},
 
     senha: {type: String, required: true},
@@ -23,15 +25,12 @@ class Usuario {
 
     constructor(body) {
         this.dados = body;
-        this.senhaGerada = "" // Armazena temporariamente a senha gerada, antes do hash para salvar no banco de dados
-                              // É usada para enviar a senha para o e-mail do usuário
         this.erros = {
             nome: "",
             estado: "",
             email: "",
             telefone: "",
             senha: "",
-            emailEnviado: ""
         };
         this.usuario = null;
         this.valido = true;
@@ -109,18 +108,7 @@ class Usuario {
     }
 
     gerarSenha() {
-        this.senhaGerada = Math.random().toString(36).slice(-6) // 6 caracteres alfanuméricos
-    }
-
-    hashSenha() {
-        try {
-            const salt = bcrypt.genSaltSync(10);
-            const hash = bcrypt.hashSync(this.senhaGerada, salt);
-            this.dados.senha = hash
-        } catch(e) {
-            this.erros.senha = "Erro durante a criação (hash) da senha! Tente novamente!"
-            this.valido = false
-        }
+        this.dados.senha = Math.random().toString(36).slice(-6) // 6 caracteres alfanuméricos
     }
 
     async enviarSenha(tipo) {
@@ -132,13 +120,13 @@ class Usuario {
         if (tipo === "senhaInicial") {
             assunto = "SENHA DE ACESSO (Projeto Controle de Usuário)";
             texto = ""
-            html = `<p>Conta criada com sucesso!</p><p>Senha de acesso:</p><h3>${this.dados.senhaGerada}</h3>`
+            html = `<h2>Olá, ${this.usuario.nome}.</h2> <h2>Conta criada com sucesso.</h2> <h2>Senha de acesso:</h2> <h1 style="color: blue">${this.usuario.senha}</h1>`
         }
 
         // Transportador
         let transporter = nodemailer.createTransport({
             host: process.env.emailServico,
-            port: 587,
+            port: process.env.emailPorta,
             secure: false,
             auth: {
                 user: process.env.emailUsuario,
@@ -151,8 +139,8 @@ class Usuario {
 
         // Opções
         let mailOptions = {
-            from: 'Projeto Controle de Usuário',
-            to: this.dados.email,
+            from: process.env.emailUsuario,
+            to: this.usuario.email,
             subject: assunto,
             text: texto,
             html: html
@@ -160,15 +148,16 @@ class Usuario {
 
         // Envio
         try {
-            const info = await transporter.sendMail(mailOptions)
-            if (info === undefined) {
-                this.erros.emailEnviado = "Erro ao enviar a senha para o e-mail informado."
-                this.valido = false
-            }
-        } catch(e) { // Se ocorrer QUALQUER tipo de erro na tentativa de envio do e-mail
-            this.erros.emailEnviado = "Erro desconhecido ao enviar a senha para o e-mail informado."
+            transporter.sendMail(mailOptions, () => {})
+        } catch(e) {
+            console.log(e)
             this.valido = false
         }
+    }
+
+    async acharPorId(id) {
+        this.usuario = await UsuarioModelo.findOne({_id: id})
+        return
     }
 
     async registrar() {
@@ -181,10 +170,8 @@ class Usuario {
         await this.verificarEmail()
         if (!this.valido) return
 
-        // Geração e hash de senha
+        // Geração da senha
         this.gerarSenha()
-        this.hashSenha()
-        if (!this.valido) return
 
         // Criação do usuário no banco de dados
         this.usuario = await UsuarioModelo.create(this.dados)
