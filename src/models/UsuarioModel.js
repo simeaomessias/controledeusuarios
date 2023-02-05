@@ -195,6 +195,13 @@ class Usuario {
         // Criação do usuário no banco de dados
         this.usuario = await UsuarioModelo.create(this.dados)
     }
+    async verificarLogin(email, senha) {
+        
+        this.usuario = await UsuarioModelo.findOne({email: email, senha: senha}).lean()
+        if (!this.usuario) {
+            this.valido = false
+        }
+    }
 }
 
 export default {

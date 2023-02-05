@@ -1,6 +1,6 @@
 // Importações
 
-import UsuarioModel from "../models/USuarioModel.js"
+import UsuarioModel from "../models/UsuarioModel.js"
 const Usuario = UsuarioModel.Usuario;
 
 // Login
@@ -9,9 +9,25 @@ const formLogin = (req, res) => {
     res.render('home/formLogin', {layout: 'mainHome'});
     return;
 }
-const verificaLogin = (req, res) => {
-    res.send("VERIFICAÇÃO DOS DADOS DE LOGIN")
-    return;
+const verificaLogin = async (req, res) => {
+
+    const usuario = new Usuario()
+    await usuario.verificarLogin(req.body.email, req.body.senha)
+
+    if (!usuario.valido) {
+        req.session.save( () => {
+            res.render('home/formLogin', {
+                layout: 'mainHome',
+                email: req.body.email,
+                senha: req.body.senha,
+                erro: "E-mail e/ou senha incorretos."
+            })
+            return
+        })
+        return
+    }
+
+    return res.redirect(`/usuario/${usuario.usuario._id}`)
 }
 
 // Criar nova conta + Envio de senha inicial
@@ -196,8 +212,6 @@ const enviaSenhaRecuperada = async (req, res) => {
     }
 }
 
-
-
 export default {
 
     formLogin,
@@ -212,5 +226,4 @@ export default {
     recuperaSenha,
     msgEmailSenhaRecuperada,
     enviaSenhaRecuperada
-
 }

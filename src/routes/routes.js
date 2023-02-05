@@ -4,6 +4,7 @@ const router = express.Router();
 
 // Controllers
 import homeController from "../controllers/homeController.js"
+import usuarioController from "../controllers/usuarioController.js"
 
 // Home - Login
 router.get('/', homeController.formLogin)
@@ -20,5 +21,8 @@ router.get('/recuperar-senha', homeController.formRecuperarSenha)
 router.post('/recuperar-senha', homeController.recuperaSenha)
 router.get('/enviar-senha-recuperada/:id?', homeController.msgEmailSenhaRecuperada)
 router.post('/enviar-senha-recuperada/:id?', homeController.enviaSenhaRecuperada)
+
+// Usuario - Home
+router.get('/usuario/:id?', usuarioController.telaInicial)
 
 export default router
