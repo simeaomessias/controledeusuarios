@@ -72,6 +72,18 @@
                 </div>
             </div>
         </div>
+
+        {{!-- Mensagens de erro durante a geração de senha ou envio da mesma por e-mail --}}
+        {{#if erros.senha}}
+            <div class="container-fluid">
+                <p class="erro-validacao">{{erros.senha}}</p>
+            </div>
+        {{/if}}
+        {{#if erros.emailEnviado}}
+            <div class="container-fluid">
+                <p class="erro-validacao">{{erros.emailEnviado}}</p>
+            </div>
+        {{/if}}
         
         {{!-- Botões --}}
         <div class="container-fluid mt-2 mb-3">
