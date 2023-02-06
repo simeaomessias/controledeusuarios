@@ -22,8 +22,11 @@ router.post('/recuperar-senha', homeController.recuperaSenha)
 router.get('/enviar-senha-recuperada/:id?', homeController.msgEmailSenhaRecuperada)
 router.post('/enviar-senha-recuperada/:id?', homeController.enviaSenhaRecuperada)
 
-// Usuario - Home
+// Usuario - Tela inicial
 router.get('/usuario', usuarioController.telaInicial)
+
+// Usuario - Lista geral de usuários
+router.get('/usuario/listar-usuarios', usuarioController.listarUsuarios)
 
 // Usuario - Logout
 router.get('/usuario/logout', usuarioController.logout)

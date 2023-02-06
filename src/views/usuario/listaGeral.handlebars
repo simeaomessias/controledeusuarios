@@ -1,0 +1,30 @@
+<div class="container mt-3 mb-3 px-0 border border-dark rounded">
+
+    <div class="d-flex flex-row justify-content-center align-items-center py-1 px-3 rounded-top usuario-tabela-titulo">
+        <span><b>Usuários cadastrados</b></span>
+    </div>
+
+    <div class="container d-flex flex-row mt-3 usuario-div-tabela">
+
+        <table class="table table-sm table-borderless table-hover usuario-tabela">
+
+            <thead class="py-0 usuario-tabela-head">
+                <tr>
+                    <td class="py-0"><b>Nome</b></td>
+                    <td class="py-0"><b>Email / Telefone</b></td>
+                </tr>
+            </thead>
+
+            <tbody>
+                {{#each lista}}
+                    <tr>
+                        <td class="py-0 usuario-tabela-nome"><span>{{nome}}</span></td>
+                        <td class="py-0">{{email}}<br>{{telefone}}</td>
+                    </tr>
+                {{/each}}
+            </tbody>
+
+        </table>        
+
+    </div>
+</div>

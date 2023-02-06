@@ -135,6 +135,35 @@
     color: var(--preto);
 }
 
+.usuario-div-tabela {
+    overflow-x: scroll;
+}
+
+.usuario-tabela {
+    min-width: none;
+}
+
+.usuario-tabela-titulo {
+    background-color: var(--khaki);
+    border-bottom: 1px solid black;
+    border-radius: 0;
+    width: 100%;
+    height: 40px;
+    font-size: 18px;
+    color: var(--preto);
+}
+
+.usuario-tabela-head {
+    background-color: var(--khaki);
+    border: 1px solid var(--khaki);
+    color: var(--preto);
+    border-radius: 3px;
+}
+
+.usuario-tabela-nome {
+    min-width: 300px;
+}
+
 @media (max-width: 767px) {
 
     .usuario-navbar-ul {

@@ -179,6 +179,11 @@ class Usuario {
         }
     }
 
+    async listarUsuarios() {
+        const resultado = UsuarioModelo.find().sort({nome: 'asc'}).lean()
+        return resultado
+    }
+
     async registrar() {
 
         // Validação
