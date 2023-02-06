@@ -32,6 +32,23 @@ Problema idealizado para o primeiro projeto da **Mentoria Conquiste Sua Vaga - T
 - NODE.JS
 - Bibliotecas: express, express-handlebars, express-session, mongoose, connect-mongo, dotenv, connect-flash, nodemailer
 
+## Como acessar
+- **Deploy** <br>
+  https://controledeusuarios.onrender.com/
+- **Para instalar e executar o projeto** <br>
+  1. Fazer clone deste repositório. <br>
+     `https://github.com/simeaomessias/controledeusuarios.git`
+  2. Certificar que o npm está instalado. <br>
+     O npm pode ser obtido instalando o [Node](https://nodejs.org/en/).
+  3. Configurar os valores da seguintes variaveis de ambiente para o banco de dados e para o nodemailer:<br>
+     - mongoUri (endereço para um banco MongoDB)<br>
+     - emailServico (servidor SMTP)<br>
+     - emailPorta (porta de conexão)<br>
+     - emailUsuario (credencial do e-mail)<br>
+     - emailSenha (credencial do e-mail)<br>
+  4. Executar o comando *npm start*. <br>
+     Acesse http://localhost:8081 para visualizar no navegador.
+
 ## Cronograma previsto
 - **Dia 1 (31/01/23):** Criação e configuração do projeto. <br>
 - **Dia 2 (01/02/23):** Tela de login. Tela de criação de conta. Tela principal do usuário comum. Tela principal do administrador.<br>
