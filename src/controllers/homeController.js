@@ -72,11 +72,10 @@ const criaConta = async (req, res) => {
 }
 const msgEmailSenhaInicial = (req, res) => {
 
-    res.render('home/msgEnviandoSenhaInicial', {
+    return res.render('home/msgEnviandoSenhaInicial', {
         layout: 'mainHome',
         id: req.params.id
     })
-    return;
 
 }
 const enviaSenhaInicial = async (req, res) => {
@@ -125,8 +124,7 @@ const enviaSenhaInicial = async (req, res) => {
 
 // Home - Recuperar de senha
 const formRecuperarSenha = (req, res) => {
-    res.render('home/formRecuperarSenha', {layout: 'mainHome'});
-    return;
+    return res.render('home/formRecuperarSenha', {layout: 'mainHome'});
 }
 const recuperaSenha = async (req, res) => {
 
