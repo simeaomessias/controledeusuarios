@@ -160,9 +160,11 @@ class Usuario {
         // Envio
         try {
             transporter.sendMail(mailOptions, () => {})
+            return
         } catch(e) {
             console.log(e)
             this.valido = false
+            return
         }
     }
 

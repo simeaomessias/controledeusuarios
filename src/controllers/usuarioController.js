@@ -8,6 +8,11 @@ const telaInicial = (req, res) => {
     return res.render('usuario/telaInicial', {layout: 'mainUsuario'})
 }
 
+// Usuario - Minha conta
+const minhaConta = (req, res) => {
+    return res.render('usuario/minhaConta', {layout: 'mainUsuario'})
+}
+
 // Usuario - Lista geral de usuários
 const listarUsuarios = async (req, res) => {
 
@@ -45,6 +50,7 @@ const logout = (req, res) => {
 
 export default {
     telaInicial,
+    minhaConta,
     listarUsuarios,
     logout
 }
