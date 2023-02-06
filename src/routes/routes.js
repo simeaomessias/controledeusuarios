@@ -23,6 +23,9 @@ router.get('/enviar-senha-recuperada/:id?', homeController.msgEmailSenhaRecupera
 router.post('/enviar-senha-recuperada/:id?', homeController.enviaSenhaRecuperada)
 
 // Usuario - Home
-router.get('/usuario/:id?', usuarioController.telaInicial)
+router.get('/usuario', usuarioController.telaInicial)
+
+// Usuario - Logout
+router.get('/usuario/logout', usuarioController.logout)
 
 export default router

@@ -1,5 +1,4 @@
 // Importações
-
 import UsuarioModel from "../models/UsuarioModel.js"
 const Usuario = UsuarioModel.Usuario;
 
@@ -27,7 +26,7 @@ const verificaLogin = async (req, res) => {
         return
     }
 
-    return res.redirect(`/usuario/${usuario.usuario._id}`)
+    return res.redirect(`/usuario`)
 }
 
 // Criar nova conta + Envio de senha inicial

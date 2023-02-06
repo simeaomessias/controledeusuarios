@@ -17,6 +17,7 @@
     padding: 0;
 }
 
+/* HOME */
 
 .body-home {
     background-color: var(--branco);
@@ -103,5 +104,46 @@
     .criarConta-container, .telaEspera-container {
         width: 75%;
         max-width: 400px;
+    }
+}
+
+/* TELA DO USUÁRIO */
+
+.navbar {
+    background-color: var(--khaki);
+    border: 1px solid black;
+    padding: 0;
+    height: 46px;
+}
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+.navbar .nav-item a {
+    min-width: 150px;
+    color: var(--preto);
+    text-align: center;
+}
+.navbar .nav-item a:hover {
+    background-color: var(--khaki-green);
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.usuario-navbar-hamburger {
+    border: none;
+    margin-right: 5px;
+    color: var(--preto);
+}
+
+@media (max-width: 767px) {
+
+    .usuario-navbar-ul {
+        background-color: var(--khaki);
+        border-left: 1px solid black;
+        border-right: 1px solid black;
+    }
+
+    .usuario-link-logout {
+        border-bottom: 1px solid black;
     }
 }
