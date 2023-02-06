@@ -30,6 +30,7 @@ Problema idealizado para o primeiro projeto da **Mentoria Conquiste Sua Vaga - T
 - CSS3
 - JAVASCRIPT
 - NODE.JS
+- MONGODB
 - Bibliotecas: express, express-handlebars, express-session, mongoose, connect-mongo, dotenv, connect-flash, nodemailer
 
 ## Como acessar
