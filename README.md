@@ -50,14 +50,6 @@ Problema idealizado para o primeiro projeto da **Mentoria Conquiste Sua Vaga - T
   4. Executar o comando *npm start*. <br>
      Acesse http://localhost:8081 para visualizar no navegador.
 
-## Cronograma previsto
-- **Dia 1 (31/01/23):** Criação e configuração do projeto. <br>
-- **Dia 2 (01/02/23):** Tela de login. Tela de criação de conta. Tela principal do usuário comum. Tela principal do administrador.<br>
-- **Dia 3 (02/02/23):** Continuação do dia 2 + testes simples
-- **Dia 4 (03/02/23):** Classe para manipulação dos dados de usuários. Envio de senha por e-mail (inicial, alteração e redefinição pelo admin)  
-- **Dia 5 (04/02/23):** Continuação do dia 4 + testes simples
-- **Dia 6 (05/02/23):** Deploy para colegas testarem e sugerirem melhorias.
-
 ## Autor
 https://github.com/simeaomessias
 
